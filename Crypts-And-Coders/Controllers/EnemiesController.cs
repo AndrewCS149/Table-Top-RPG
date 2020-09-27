@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.DTOs;
+using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -77,7 +72,6 @@ namespace Crypts_And_Coders.Controllers
 
             await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
 
-
             return CreatedAtAction("GetEnemy", new { id = enemy.Id }, enemy);
         }
 
@@ -88,7 +82,6 @@ namespace Crypts_And_Coders.Controllers
             await _enemy.Delete(id);
 
             await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
-
 
             return NoContent();
         }

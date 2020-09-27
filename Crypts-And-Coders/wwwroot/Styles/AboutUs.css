@@ -1,0 +1,50 @@
+﻿body {
+    background-color: #212121;
+    color: azure;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.dropdown {
+    margin: 20px 0px;
+}
+
+main {
+    margin-top: 15px;
+}
+
+#lami {
+    max-width: 200px;
+    margin-bottom: 10%;
+}
+
+#lami-p {
+    max-width: 350px;
+    font: bold;
+    margin-bottom: 10%;
+    float: right;
+}
+
+#andrew {
+    max-width: 200px;
+    margin-bottom: 15%;
+}
+
+#andrew-p {
+    max-width: 350px;
+    float: right;
+    font: bold;
+    margin-bottom: 10%;
+}
+
+#nicco {
+    max-width: 200px;
+}
+
+#nicco-p {
+    max-width: 350px;
+    font: bold;
+    float: right;
+}

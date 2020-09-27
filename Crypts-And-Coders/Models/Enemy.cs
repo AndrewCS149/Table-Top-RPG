@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace Crypts_And_Coders.Models
@@ -12,7 +9,8 @@ namespace Crypts_And_Coders.Models
         /// Id, Ability, and Type properties
         /// Enemy Species specifically for enemies
         /// </summary>
-        public int Id {get; set;}
+        public int Id { get; set; }
+
         public string Abilities { get; set; }
         public string Type { get; set; }
 

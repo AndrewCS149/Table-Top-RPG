@@ -1,19 +1,18 @@
-﻿using System;
+﻿using Crypts_And_Coders.Models;
+using Crypts_And_Coders.Models.DTOs;
+using Crypts_And_Coders.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.DTOs;
-using Crypts_And_Coders.Models.Interfaces;
-using Crypts_And_Coders.Models.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -74,9 +73,6 @@ namespace Crypts_And_Coders.Controllers
                 var identityRole = await _userManager.GetRolesAsync(user);
                 var token = CreateToken(user, identityRole.ToList());
 
-                await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
-
-
                 return Ok(new
                 {
                     jwt = new JwtSecurityTokenHandler().WriteToken(token),
@@ -86,7 +82,7 @@ namespace Crypts_And_Coders.Controllers
             return BadRequest("Invalid login attempt");
         }
 
-         private JwtSecurityToken CreateToken(ApplicationUser appUser, List<string> role)
+        private JwtSecurityToken CreateToken(ApplicationUser appUser, List<string> role)
         {
             // Token needs info called "Claims" which tell something True abou the user. I.e. I have red hair, my name is Nicholas, etc..
             // A User is the "principle" and can have many forms of "identity" containing these claims i.e. birth cert, drivers license, SSN, etc...

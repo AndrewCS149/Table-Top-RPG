@@ -1,10 +1,6 @@
-﻿using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.DTOs;
+﻿using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -39,13 +35,12 @@ namespace CryptsAndTesters
         [Fact]
         public async Task CanGetCharacterStat()
         {
-            
             var repo = BuildRepo();
 
             var result = await repo.GetCharacterStat(1, 1);
 
             Assert.NotNull(result);
-            Assert.Equal("Strength", result.Stat.Name);
+            Assert.Equal("Charisma", result.Stat.Name);
         }
 
         [Fact]
@@ -75,7 +70,6 @@ namespace CryptsAndTesters
             var result = await repo.GetCharacterStat(1, 1);
 
             Assert.Equal(newCharacterStat.Level, result.Level);
-
         }
 
         [Fact]

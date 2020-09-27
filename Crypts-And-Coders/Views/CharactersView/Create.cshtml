@@ -5,45 +5,62 @@
     Layout = "_Layout";
 }
 
-<h4>Character Creation</h4>
-<hr />
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Locations</title>
+    <link rel="stylesheet" href="~/Styles/StyleSheet.css" type="text/css" />
+</head>
+<body>
+    <h3 class="create-title">Character Creation</h3>
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" required />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="WeaponId" class="control-label"></label>
-                <input asp-for="WeaponId" class="form-control" />
+                <input asp-for="WeaponId" class="form-control" required />
                 <span asp-validation-for="WeaponId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LocationId" class="control-label"></label>
-                <input asp-for="LocationId" class="form-control" />
+                <input asp-for="LocationId" class="form-control" required />
                 <span asp-validation-for="LocationId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Species</label>
-                <select class="form-control">
+                <select asp-for="Species" class="form-control" required>
+                    <option value="" disabled selected hidden>Choose a species</option>
                     @foreach (var speciesName in Enum.GetValues(typeof(Crypts_And_Coders.Models.SpeciesAndClass.Species)))
                     {
-                        <option> @speciesName.ToString() </option>
+                        <option value="@speciesName.ToString()"> @speciesName.ToString() </option>
+                        if (speciesName.ToString() == "Tiefling") break;
                     }
                 </select>
-                <span class="text-danger"></span>
+                <span asp-validation-for="Species" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Class</label>
-                <select class="form-control"></select>
-                <span class="text-danger"></span>
+                <select asp-for="Class" class="form-control" required>
+                    <option value="" disabled selected hidden>Choose a class</option>
+                    @foreach (var className in Enum.GetValues(typeof(Crypts_And_Coders.Models.SpeciesAndClass.Class)))
+                    {
+                        <option value="@className.ToString()"> @className.ToString() </option>
+                    }
+                </select>
+                <span asp-validation-for="Class" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
+                <input asp-for="UserName" class="form-control" required />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -53,10 +70,8 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@*@section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial@Model.SpeciesAndClass.Species);}
-    }*@
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</body>
+</html>

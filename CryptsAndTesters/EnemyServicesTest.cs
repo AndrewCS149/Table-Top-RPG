@@ -2,12 +2,9 @@
 using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.Services;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using static Crypts_And_Coders.Models.SpeciesAndClass;
 
 namespace CryptsAndTesters
 {
@@ -159,8 +156,6 @@ namespace CryptsAndTesters
         {
             var repo = BuildRepo();
 
-
-
             await repo.AddItemToLoot(1, 3);
 
             EnemyDTO enemy = await repo.GetEnemy(1);
@@ -172,7 +167,7 @@ namespace CryptsAndTesters
                 {
                     Id = 3,
                     Name = "Dungeon Key",
-                    Value = 100
+                    Value = "100 cp"
                 }
             };
             bool found = false;
@@ -204,7 +199,7 @@ namespace CryptsAndTesters
                 {
                     Id = 2,
                     Name = "Cup",
-                    Value = 5
+                    Value = "100 cp"
                 }
             };
             Assert.DoesNotContain(expected, enemy.Loot);

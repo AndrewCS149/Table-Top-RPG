@@ -1,44 +1,53 @@
-﻿@model Crypts_And_Coders.Models.Enemy
+﻿@model Crypts_And_Coders.Models.DTOs.EnemyDTO
 
 @{
     ViewData["Title"] = "Create";
     Layout = "_Layout";
 }
+<!DOCTYPE html>
 
-<h1>Create</h1>
+<html>
 
-<h4>Enemy</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Abilities" class="control-label"></label>
-                <input asp-for="Abilities" class="form-control" />
-                <span asp-validation-for="Abilities" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
-                <input asp-for="Type" class="form-control" />
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Species" class="control-label"></label>
-                <select asp-for="Species" class="form-control"></select>
-                <span asp-validation-for="Species" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<head>
+    <title>Enemies</title>
+    <link rel="stylesheet" href="~/Styles/StyleSheet.css" type="text/css" />
+</head>
+<body>
+    <h3 class="create-title">Enemy Creation</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Abilities" class="control-label"></label>
+                    <input asp-for="Abilities" class="form-control" />
+                    <span asp-validation-for="Abilities" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Type" class="control-label"></label>
+                    <input asp-for="Type" class="form-control" />
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Species</label>
+                    <select asp-for="Species" class="form-control" required>
+                        <option value="" disabled selected hidden>Choose a species</option>
+                        @foreach (var speciesName in Enum.GetValues(typeof(Crypts_And_Coders.Models.SpeciesAndClass.Species)))
+                        {
+                            <option value="@speciesName.ToString()"> @speciesName.ToString() </option>
+                        }
+                    </select>
+                    <span asp-validation-for="Species" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@*@section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }*@
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</body>
+</html>

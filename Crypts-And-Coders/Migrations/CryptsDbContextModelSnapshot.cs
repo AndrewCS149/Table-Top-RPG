@@ -117,29 +117,32 @@ namespace Crypts_And_Coders.Migrations
                         new
                         {
                             Id = 1,
-                            Class = 3,
+                            Class = 9,
                             LocationId = 1,
                             Name = "Galdifor",
-                            Species = 1,
+                            Species = 2,
+                            UserName = "Seed",
                             WeaponId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Class = 0,
-                            LocationId = 1,
+                            Class = 7,
+                            LocationId = 2,
                             Name = "Dragorn",
-                            Species = 3,
-                            WeaponId = 1
+                            Species = 1,
+                            UserName = "Seed",
+                            WeaponId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Class = 4,
-                            LocationId = 1,
+                            Class = 2,
+                            LocationId = 3,
                             Name = "Glen",
-                            Species = 0,
-                            WeaponId = 1
+                            Species = 7,
+                            UserName = "Seed",
+                            WeaponId = 3
                         });
                 });
 
@@ -212,37 +215,37 @@ namespace Crypts_And_Coders.Migrations
                         {
                             StatId = 1,
                             CharacterId = 1,
-                            Level = 0
+                            Level = 5
                         },
                         new
                         {
-                            StatId = 2,
+                            StatId = 6,
                             CharacterId = 1,
-                            Level = 0
+                            Level = 8
                         },
                         new
                         {
                             StatId = 2,
                             CharacterId = 2,
-                            Level = 0
+                            Level = 2
                         },
                         new
                         {
                             StatId = 3,
                             CharacterId = 2,
-                            Level = 0
+                            Level = 10
                         },
                         new
                         {
-                            StatId = 1,
+                            StatId = 4,
                             CharacterId = 3,
-                            Level = 0
+                            Level = 4
                         },
                         new
                         {
-                            StatId = 3,
+                            StatId = 5,
                             CharacterId = 3,
-                            Level = 0
+                            Level = 7
                         });
                 });
 
@@ -271,21 +274,21 @@ namespace Crypts_And_Coders.Migrations
                         {
                             Id = 1,
                             Abilities = "Slash",
-                            Species = 6,
+                            Species = 9,
                             Type = "Warrior"
                         },
                         new
                         {
                             Id = 2,
                             Abilities = "Smash",
-                            Species = 7,
+                            Species = 10,
                             Type = "Beast"
                         },
                         new
                         {
                             Id = 3,
                             Abilities = "Firebreath",
-                            Species = 8,
+                            Species = 11,
                             Type = "Mythical"
                         });
                 });
@@ -345,12 +348,7 @@ namespace Crypts_And_Coders.Migrations
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CharacterId")
-                        .HasColumnType("int");
-
                     b.HasKey("EnemyId", "ItemId");
-
-                    b.HasIndex("CharacterId");
 
                     b.HasIndex("ItemId");
 
@@ -399,8 +397,8 @@ namespace Crypts_And_Coders.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -411,19 +409,19 @@ namespace Crypts_And_Coders.Migrations
                         {
                             Id = 1,
                             Name = "Health Potion",
-                            Value = 25
+                            Value = "25 gp"
                         },
                         new
                         {
                             Id = 2,
                             Name = "Cup",
-                            Value = 5
+                            Value = "5 gp"
                         },
                         new
                         {
                             Id = 3,
                             Name = "Dungeon Key",
-                            Value = 100
+                            Value = "100 gp"
                         });
                 });
 
@@ -454,7 +452,7 @@ namespace Crypts_And_Coders.Migrations
                         new
                         {
                             Id = 2,
-                            Description = "Plagued by the great war, Murkden remains uninhibited from all intelligent life forms, although various beasts still dwell in the deep marshes.",
+                            Description = "Plagued by the great war, Murkden remains uninhabited from all intelligent life forms, although various beasts still dwell in the deep marshes.",
                             Name = "Murkden"
                         },
                         new
@@ -472,22 +470,7 @@ namespace Crypts_And_Coders.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("RequestContent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RequestContentType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RequestMethod")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("RequestTimestamp")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RequestUri")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
+                    b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -513,17 +496,32 @@ namespace Crypts_And_Coders.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Strength"
+                            Name = "Charisma"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Cunning"
+                            Name = "Constitution"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Constitution"
+                            Name = "Dexterity"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Intelligence"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Strength"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Wisdom"
                         });
                 });
 
@@ -534,8 +532,8 @@ namespace Crypts_And_Coders.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BaseDamage")
-                        .HasColumnType("int");
+                    b.Property<string>("BaseDamage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -551,21 +549,21 @@ namespace Crypts_And_Coders.Migrations
                         new
                         {
                             Id = 1,
-                            BaseDamage = 15,
+                            BaseDamage = "1d4",
                             Name = "Claymore",
                             Type = "Close Range"
                         },
                         new
                         {
                             Id = 2,
-                            BaseDamage = 18,
+                            BaseDamage = "1d8",
                             Name = "Wizard Staff",
                             Type = "Magical"
                         },
                         new
                         {
                             Id = 3,
-                            BaseDamage = 10,
+                            BaseDamage = "1d6",
                             Name = "Longbow",
                             Type = "Long Range"
                         });
@@ -749,10 +747,6 @@ namespace Crypts_And_Coders.Migrations
 
             modelBuilder.Entity("Crypts_And_Coders.Models.EnemyLoot", b =>
                 {
-                    b.HasOne("Crypts_And_Coders.Models.Character", null)
-                        .WithMany("EnemyLoot")
-                        .HasForeignKey("CharacterId");
-
                     b.HasOne("Crypts_And_Coders.Models.Enemy", "Enemy")
                         .WithMany("Loot")
                         .HasForeignKey("EnemyId")

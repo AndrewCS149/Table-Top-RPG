@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Crypts_And_Coders.Models
+﻿namespace Crypts_And_Coders.Models
 {
     public class SpeciesAndClass
     {
         public enum Species
         {
-            Human,
+            Dragonborn,
+            Dwarf,
             Elf,
             Gnome,
-            Dwarf,
+            HalfElf,
+            Halfling,
             HalfOrc,
-            Dragonborn,
+            Human,
+            Tiefling,
             Goblin,
             Troll,
             Dragon,
@@ -25,17 +23,19 @@ namespace Crypts_And_Coders.Models
 
         public enum Class
         {
-            Paladin,
-            Wizard,
-            Ranger,
-            Thief,
+            Artificer,
+            Barbarian,
             Bard,
             Cleric,
-            Monk,
-            Fighter,
             Druid,
-            Archer,
-            Swordsman
+            Fighter,
+            Monk,
+            Paladin,
+            Ranger,
+            Rogue,
+            Sorcerer,
+            Warlock,
+            Wizard
         }
     }
 }

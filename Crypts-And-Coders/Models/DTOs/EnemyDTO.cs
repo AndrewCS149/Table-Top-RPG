@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using static Crypts_And_Coders.Models.SpeciesAndClass;
+﻿using System.Collections.Generic;
 
 namespace Crypts_And_Coders.Models.DTOs
 {
@@ -13,6 +9,5 @@ namespace Crypts_And_Coders.Models.DTOs
         public string Type { get; set; }
         public string Species { get; set; }
         public List<EnemyLootDTO> Loot { get; set; }
-
     }
 }

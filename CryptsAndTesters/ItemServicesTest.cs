@@ -1,13 +1,9 @@
-﻿using Crypts_And_Coders.Models.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using Crypts_And_Coders.Models.Interfaces;
-using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Data;
-using System.Threading.Tasks;
+﻿using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.DTOs;
+using Crypts_And_Coders.Models.Interfaces;
+using Crypts_And_Coders.Models.Services;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace CryptsAndTesters
 {
@@ -26,7 +22,7 @@ namespace CryptsAndTesters
             {
                 Id = 4,
                 Name = "Magic Potion",
-                Value = 125
+                Value = "100 cp"
             };
 
             var repo = BuildRepo();
@@ -69,7 +65,7 @@ namespace CryptsAndTesters
             {
                 Id = 4,
                 Name = "Magic Potion",
-                Value = 125
+                Value = "100 cp"
             };
 
             var repo = BuildRepo();
@@ -100,7 +96,7 @@ namespace CryptsAndTesters
             {
                 Id = 4,
                 Name = "Magic Potion",
-                Value = 125
+                Value = "100 cp"
             };
 
             ItemDTO newItemDTO = new ItemDTO()

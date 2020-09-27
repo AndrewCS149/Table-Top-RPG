@@ -2,7 +2,6 @@
 using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -88,11 +87,11 @@ namespace Crypts_And_Coders.Models.Services
                 Name = result.Name,
                 Description = result.Description
             };
-            
+
             dto.Enemies = new List<LocationEnemyInfoDTO>();
             foreach (var enemy in result.Enemies)
             {
-                if(_enemy != null)
+                if (_enemy != null)
                 {
                     var rawEnemy = await _enemy.GetEnemy(enemy.EnemyId);
 
@@ -103,7 +102,6 @@ namespace Crypts_And_Coders.Models.Services
                         Species = rawEnemy.Species,
                         Type = rawEnemy.Type
                     });
-                       
                 }
             }
             return dto;
@@ -126,6 +124,41 @@ namespace Crypts_And_Coders.Models.Services
             _context.Entry(location).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return locationDTO;
+        }
+
+        /// <summary>
+        /// Add an enemy to a location
+        /// </summary>
+        /// <param name="locationId">Id of location</param>
+        /// <param name="enemyId">Id of enemy</param>
+        /// <returns>Successful result of enemy addition</returns>
+        public async Task AddEnemyToLocation(int locationId, int enemyId)
+        {
+            EnemyInLocation enemiesInLoc = new EnemyInLocation()
+            {
+                LocationId = locationId,
+                EnemyId = enemyId
+            };
+
+            _context.Entry(enemiesInLoc).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Remove an enemy from a location
+        /// </summary>
+        /// <param name="locationId">Id of location</param>
+        /// <param name="enemyId">Id of enemy</param>
+        /// <returns>Successful result of enemy removal</returns>
+        public async Task RemoveEnemyFromLocation(int locationId, int enemyId)
+        {
+            EnemyInLocation result = await _context.EnemyInLocation.FindAsync(locationId, enemyId);
+
+            if (result != null)
+            {
+                _context.Entry(result).State = EntityState.Deleted;
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

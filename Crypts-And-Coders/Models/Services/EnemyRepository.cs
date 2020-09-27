@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using static Crypts_And_Coders.Models.SpeciesAndClass;
 
@@ -82,7 +81,6 @@ namespace Crypts_And_Coders.Models.Services
         public async Task<EnemyDTO> GetEnemy(int id)
         {
             Enemy enemy = await _context.Enemy.Where(x => x.Id == id).FirstOrDefaultAsync();
-
 
             EnemyDTO enemyDTO = new EnemyDTO()
             {

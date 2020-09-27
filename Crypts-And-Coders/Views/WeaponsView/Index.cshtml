@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Crypts_And_Coders.Models.Weapon>
+
+@{
+    Layout = "_Layout";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Weapons</title>
+    <link rel="stylesheet" href="~/Styles/StyleSheet.css" type="text/css" />
+</head>
+
+<body>
+
+    <header>
+        <div class="dropdown show">
+            <a class="btn btn-secondary" href="Home">Home</a>
+            <a class="btn btn-secondary" href="CharactersView">Characters</a>
+            <a class="btn btn-secondary" href="LocationsView">Locations</a>
+            <a class="btn btn-secondary" href="EnemiesView">Enemies</a>
+            <a class="btn btn-secondary" href="ItemsView">Items</a>
+            <a class="btn btn-secondary" href="#">Weapons</a>
+            <a class="btn btn-secondary" href="LogView">Logs</a>
+            <a class="btn btn-secondary" href="AboutUs">About Us</a>
+        </div>
+        <h2 class="lead">CRYPTS & CODERS</h2>
+    </header>
+    <main>
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BaseDamage)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BaseDamage)
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

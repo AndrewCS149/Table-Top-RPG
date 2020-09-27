@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Crypts_And_Coders.Data;
-using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.Interfaces;
-using Microsoft.CodeAnalysis.Diagnostics;
+﻿using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.DTOs;
+using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using System.Net.Http;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using static Crypts_And_Coders.Models.Services.UserServices;
-using Crypts_And_Coders.Models.Services;
-using Microsoft.AspNetCore.Mvc.WebApiCompatShim;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -66,8 +56,6 @@ namespace Crypts_And_Coders.Controllers
         [HttpPut("{charId}")]
         public async Task<IActionResult> PutCharacter(int charId, CharacterDTO character)
         {
-
-
             if (!ValidateUser(User, _character, charId))
             {
                 return BadRequest("You do not have access to this account");
@@ -93,9 +81,7 @@ namespace Crypts_And_Coders.Controllers
         [HttpPost]
         public async Task<ActionResult<Character>> PostCharacter(CharacterDTO character)
         {
-
             character.UserName = User.FindFirst("UserName").Value;
-
 
             await _character.Create(character);
 
@@ -108,13 +94,14 @@ namespace Crypts_And_Coders.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Character>> DeleteCharacter(int id)
         {
-
             if (!ValidateUser(User, _character, id))
             {
                 return BadRequest("You do not have access to this account");
             }
 
-            await _character.Delete(id);
+            bool result = await _character.Delete(id);
+
+            if (!result) return NotFound();
 
             await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
 
@@ -125,7 +112,6 @@ namespace Crypts_And_Coders.Controllers
         [HttpPost("{charId}/Items/{itemId}")]
         public async Task AddItemToInventory(int charId, int itemId)
         {
-
             if (ValidateUser(User, _character, charId))
             {
                 await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);

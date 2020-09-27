@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Crypts_And_Coders.Data;
-using Crypts_And_Coders.Models;
+﻿using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -22,14 +17,14 @@ namespace Crypts_And_Coders.Controllers
             _log = log;
         }
 
-        // GET: api/LogDatas
+        // GET: api/Logs
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LogData>>> GetLogs()
         {
             return await _log.GetAllLogData();
         }
 
-        // GET: api/LogDatas/5
+        // GET: api/Logs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<LogData>> GetLogData(int id)
         {
@@ -41,6 +36,19 @@ namespace Crypts_And_Coders.Controllers
             }
 
             return logData;
+        }
+
+        // DELETE: api/Logs/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Stat>> DeleteStat(int id)
+        {
+            LogData result = await _log.DeleteLog(id);
+
+            if(result != null)
+            {
+                return NoContent();
+            }
+            return NotFound();
         }
     }
 }

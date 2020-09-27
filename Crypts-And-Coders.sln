@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crypts-And-Coders", "Crypts-And-Coders\Crypts-And-Coders.csproj", "{FE7AD9F3-9F5D-4680-BA24-E60AC74CB32E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptsAndTesters", "CryptsAndTesters\CryptsAndTesters.csproj", "{CBD0F62D-3673-4A1C-9F10-FE120D0BD815}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptsAndTesters", "CryptsAndTesters\CryptsAndTesters.csproj", "{CBD0F62D-3673-4A1C-9F10-FE120D0BD815}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

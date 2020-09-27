@@ -7,47 +7,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.DTOs;
 
-namespace Crypts_And_Coders.Controllers
+namespace Crypts_And_Coders.Views.LocationsView
 {
     [AllowAnonymous]
     public class LocationsViewController : Controller
     {
         private readonly ILocation _location;
-        private readonly CryptsDbContext _context;
 
-        public LocationsViewController(CryptsDbContext context, ILocation location)
+        public LocationsViewController(ILocation location)
         {
             _location = location;
-            _context = context;
         }
 
         // GET: LocationsView
         public async Task<IActionResult> Index()
         {
-            var allLocations = await _location.GetLocations();
-            return View(allLocations);
-        }
-
-        // GET: LocationsView/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var location = await _context.Location
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-
-            return View(location);
+            var result = await _location.GetLocations();
+            return View(result);
         }
 
         // GET: LocationsView/Create
@@ -57,66 +37,15 @@ namespace Crypts_And_Coders.Controllers
         }
 
         // POST: LocationsView/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public async Task<ActionResult<Location>> Create([Bind("Id,Name,Description")] LocationDTO location)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Name,Description")] LocationDTO location)
         {
             if (ModelState.IsValid)
             {
                 await _location.Create(location);
-                return CreatedAtAction("GetLocation", new { id = location.Id }, location);
-            }
-            return View(location);
-        }
-
-        // GET: LocationsView/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var location = await _context.Location.FindAsync(id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-            return View(location);
-        }
-
-        // POST: LocationsView/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Location location)
-        {
-            if (id != location.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(location);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!LocationExists(location.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
             return View(location);
@@ -130,8 +59,7 @@ namespace Crypts_And_Coders.Controllers
                 return NotFound();
             }
 
-            var location = await _context.Location
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var location = await _location.GetLocation((int)id);
             if (location == null)
             {
                 return NotFound();
@@ -145,15 +73,8 @@ namespace Crypts_And_Coders.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var location = await _context.Location.FindAsync(id);
-            _context.Location.Remove(location);
-            await _context.SaveChangesAsync();
+            await _location.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool LocationExists(int id)
-        {
-            return _context.Location.Any(e => e.Id == id);
         }
     }
 }

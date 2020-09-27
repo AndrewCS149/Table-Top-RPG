@@ -1,9 +1,6 @@
 ﻿using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -25,7 +22,7 @@ namespace CryptsAndTesters
                 Id = 4,
                 Name = "Mace",
                 Type = "Close Range",
-                BaseDamage = 15
+                BaseDamage = "1d8"
             };
 
             var repo = BuildRepo();
@@ -62,7 +59,7 @@ namespace CryptsAndTesters
                 Id = 4,
                 Name = "Mace",
                 Type = "Close Range",
-                BaseDamage = 15
+                BaseDamage = "1d4"
             };
 
             var repo = BuildRepo();
@@ -86,7 +83,7 @@ namespace CryptsAndTesters
                 Id = 4,
                 Name = "Mace",
                 Type = "Close Range",
-                BaseDamage = 15
+                BaseDamage = "1d6"
             };
 
             var repo = BuildRepo();

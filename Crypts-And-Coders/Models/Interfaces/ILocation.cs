@@ -1,7 +1,5 @@
 ﻿using Crypts_And_Coders.Models.DTOs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Models.Interfaces
@@ -42,6 +40,20 @@ namespace Crypts_And_Coders.Models.Interfaces
         /// <returns>Task of completion for location delete</returns>
         Task Delete(int id);
 
-        // TODO: add enemy to locations?
+        /// <summary>
+        /// Add an enemy to a location
+        /// </summary>
+        /// <param name="locationId">Id of location</param>
+        /// <param name="enemyId">Id of enemy</param>
+        /// <returns>Successful result of enemy addition</returns>
+        Task AddEnemyToLocation(int locationId, int enemyId);
+
+        /// <summary>
+        /// Remove an enemy from a location
+        /// </summary>
+        /// <param name="locationId">Id of location</param>
+        /// <param name="enemyId">Id of enemy</param>
+        /// <returns>Successful result of enemy removal</returns>
+        Task RemoveEnemyFromLocation(int locationId, int enemyId);
     }
 }

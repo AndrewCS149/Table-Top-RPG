@@ -1,4 +1,4 @@
-﻿@model List<Crypts_And_Coders.Models.DTOs.EnemyDTO>
+﻿@model IEnumerable<Crypts_And_Coders.Models.DTOs.EnemyDTO>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,48 +6,68 @@
 }
 
 <!DOCTYPE html>
+
 <html>
+
 <head>
     <title>Enemies</title>
+    <link rel="stylesheet" href="~/Styles/StyleSheet.css" type="text/css" />
 </head>
-
 <body>
     <header>
         <div class="dropdown show">
-            <span class="lead">CRYPTS & CODERS</span>
             <a class="btn btn-secondary" href="Home">Home</a>
             <a class="btn btn-secondary" href="CharactersView">Characters</a>
             <a class="btn btn-secondary" href="LocationsView">Locations</a>
             <a class="btn btn-secondary" href="#">Enemies</a>
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Actions
-            </a>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="EnemiesView/Create">Create</a>
-                <a class="dropdown-item" href="EnemiesView/Edit">Update</a>
-                <a class="dropdown-item" href="EnemiesView/Delete">Delete</a>
-            </div>
+            <a class="btn btn-secondary" href="ItemsView">Items</a>
+            <a class="btn btn-secondary" href="WeaponsView">Weapons</a>
+            <a class="btn btn-secondary" href="LogView">Logs</a>
+            <a class="btn btn-secondary" href="AboutUs">About Us</a>
         </div>
+        <h2 class="lead">CRYPTS & CODERS</h2>
+
     </header>
 
     <main>
-        <div class="row">
-            @foreach (var item in Model)
-            {
-            <div class="col-sm-3">
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Abilities)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Species)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Abilities)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Species)
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+}
+            </tbody>
+        </table>
 
-                <h3>@item.Species</h3>
-                <p>Type: @item.Type</p>
-                <p>Ability: @item.Abilities</p>
-                <span>Loot: </span>
-                @foreach (var lootItem in item.Loot)
-                {
-                <span>@lootItem.Item.Name, </span>
-                }
-            </div>
-            }
-        </div>
     </main>
 
     <footer>

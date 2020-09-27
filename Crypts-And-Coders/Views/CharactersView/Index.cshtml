@@ -1,4 +1,4 @@
-﻿@model List<Crypts_And_Coders.Models.DTOs.CharacterDTO>
+﻿@model IEnumerable<Crypts_And_Coders.Models.DTOs.CharacterDTO>
 
 @{
     ViewData["Title"] = "Index";
@@ -11,40 +11,82 @@
 
 <head>
     <title>Characters</title>
+    <link rel="stylesheet" href="~/Styles/StyleSheet.css" type="text/css" />
 </head>
 <body>
     <header>
         <div class="dropdown show">
-            <span class="lead">CRYPTS & CODERS</span>
             <a class="btn btn-secondary" href="Home">Home</a>
             <a class="btn btn-secondary" href="#">Characters</a>
             <a class="btn btn-secondary" href="LocationsView">Locations</a>
             <a class="btn btn-secondary" href="EnemiesView">Enemies</a>
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Actions
-            </a>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="CharactersView/Create">Create</a>
-                <a class="dropdown-item" href="CharactersView/Edit">Update</a>
-                <a class="dropdown-item" href="CharactersView/Delete">Delete</a>
-            </div>
+            <a class="btn btn-secondary" href="ItemsView">Items</a>
+            <a class="btn btn-secondary" href="WeaponsView">Weapons</a>
+            <a class="btn btn-secondary" href="LogView">Logs</a>
+            <a class="btn btn-secondary" href="AboutUs">About Us</a>
         </div>
+        <h2 class="lead">CRYPTS & CODERS</h2>
+
     </header>
 
     <main>
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-sm-3">
-                    <h3>@item.Name</h3>
-                    <p>Species: @item.Species</p>
-                    <p>Class: @item.Class</p>
-                    <p>Weapon: @item.Weapon.Name</p>
-                    <p>Weapon Base Damage: @item.Weapon.BaseDamage</p>
-                </div>
-            }
-        </div>
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.WeaponId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LocationId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Species)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Class)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WeaponId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LocationId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Species)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Class)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+}
+            </tbody>
+        </table>
+
+
     </main>
 
     <footer>

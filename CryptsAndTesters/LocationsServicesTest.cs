@@ -1,10 +1,7 @@
-﻿using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.DTOs;
+﻿using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
 using Crypts_And_Coders.Models.Services;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -17,9 +14,6 @@ namespace CryptsAndTesters
             return new LocationsRepository(_db, _enemy);
         }
 
-        /// <summary>
-        /// create location test complete
-        /// </summary>
         [Fact]
         public async void CanCreateLocation()
         {
@@ -120,7 +114,7 @@ namespace CryptsAndTesters
 
             var expected = new List<string>()
             {
-                "Murkden", "Plagued by the great war, Murkden remains uninhibited from all intelligent life forms, although various beasts still dwell in the deep marshes.", "Lyderton", "Lyderton is full of simpletons who prefer to keep war and conflict outside of their borders. It is rich farmland with dense amounts of beautiful wildlife."
+                "Murkden", "Plagued by the great war, Murkden remains uninhabited from all intelligent life forms, although various beasts still dwell in the deep marshes.", "Lyderton", "Lyderton is full of simpletons who prefer to keep war and conflict outside of their borders. It is rich farmland with dense amounts of beautiful wildlife."
             };
 
             var returnList = new List<string>();

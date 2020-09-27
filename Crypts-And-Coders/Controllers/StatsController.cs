@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Crypts_And_Coders.Data;
-using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.Interfaces;
+﻿using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.DTOs;
+using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using SQLitePCL;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Controllers
 {

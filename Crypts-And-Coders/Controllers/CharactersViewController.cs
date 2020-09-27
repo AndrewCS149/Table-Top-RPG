@@ -7,46 +7,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Crypts_And_Coders.Models.Interfaces;
+using Crypts_And_Coders.Models.DTOs;
 
-namespace Crypts_And_Coders.Controllers
+namespace Crypts_And_Coders.Views.CharactersView
 {
     [AllowAnonymous]
     public class CharactersViewController : Controller
     {
-        private ICharacter _character;
-        private CryptsDbContext _context;
+        private readonly ICharacter _character;
 
-        public CharactersViewController(CryptsDbContext context, ICharacter character)
+        public CharactersViewController(ICharacter character)
         {
             _character = character;
-            _context = context;
         }
 
         // GET: CharactersView
         public async Task<IActionResult> Index()
         {
-            var allCharacters = await _character.GetCharacters();
-            return View(allCharacters);
-        }
-
-        // GET: CharactersView/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var character = await _context.Character
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (character == null)
-            {
-                return NotFound();
-            }
-
-            return View(character);
+            var result = await _character.GetCharacters();
+            return View(result);
         }
 
         // GET: CharactersView/Create
@@ -56,67 +37,15 @@ namespace Crypts_And_Coders.Controllers
         }
 
         // POST: CharactersView/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,WeaponId,LocationId,Species,Class,UserName")] Character character)
+        public async Task<IActionResult> Create(CharacterDTO character)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(character);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(character);
-        }
-
-        // GET: CharactersView/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var character = await _context.Character.FindAsync(id);
-            if (character == null)
-            {
-                return NotFound();
-            }
-            return View(character);
-        }
-
-        // POST: CharactersView/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,WeaponId,LocationId,Species,Class,UserName")] Character character)
-        {
-            if (id != character.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(character);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CharacterExists(character.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _character.Create(character);
                 return RedirectToAction(nameof(Index));
             }
             return View(character);
@@ -130,8 +59,7 @@ namespace Crypts_And_Coders.Controllers
                 return NotFound();
             }
 
-            var character = await _context.Character
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var character = await _character.GetCharacter((int)id);
             if (character == null)
             {
                 return NotFound();
@@ -145,15 +73,8 @@ namespace Crypts_And_Coders.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var character = await _context.Character.FindAsync(id);
-            _context.Character.Remove(character);
-            await _context.SaveChangesAsync();
+            await _character.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CharacterExists(int id)
-        {
-            return _context.Character.Any(e => e.Id == id);
         }
     }
 }

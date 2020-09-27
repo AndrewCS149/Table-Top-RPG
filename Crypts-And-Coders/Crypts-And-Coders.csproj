@@ -1,41 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Crypts_And_Coders</RootNamespace>
-    <UserSecretsId>0f14c218-d87c-4cf3-b83c-117017f43d93</UserSecretsId>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<RootNamespace>Crypts_And_Coders</RootNamespace>
+		<UserSecretsId>0f14c218-d87c-4cf3-b83c-117017f43d93</UserSecretsId>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Models\LogHandler.cs" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Models\LogHandler.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
 
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.6" />
 
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.6" />
 
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.WebApiCompatShim" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.WebApiCompatShim" Version="2.2.0" />
 
-    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="3.1.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
-	<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.6" />
-		  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.5.1" />
-    <PackageReference Include="Swashbuckle.Core" Version="5.6.0" />
-    <PackageReference Include="System.Security.Claims" Version="4.3.0" />
-
-  </ItemGroup>
-
-
+		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="3.1.6" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.6" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
+		<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.6" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.5.1" />
+		<PackageReference Include="Swashbuckle.Core" Version="5.6.0" />
+		<PackageReference Include="System.Security.Claims" Version="4.3.0" />
+	</ItemGroup>
 </Project>

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Crypts_And_Coders.Data;
-using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.Interfaces;
+﻿using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.DTOs;
+using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using SQLitePCL;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -33,7 +27,6 @@ namespace Crypts_And_Coders.Controllers
         public async Task<ActionResult<IEnumerable<LocationDTO>>> GetLocations()
         {
             return await _location.GetLocations();
-
         }
 
         // GET: api/Locations/5
@@ -48,8 +41,7 @@ namespace Crypts_And_Coders.Controllers
             }
 
             return location;
-        
-    }
+        }
 
         // PUT: api/Locations/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -66,7 +58,7 @@ namespace Crypts_And_Coders.Controllers
                 return BadRequest();
             }
 
-             await _location.Update(location);
+            await _location.Update(location);
 
             await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
 
@@ -95,6 +87,42 @@ namespace Crypts_And_Coders.Controllers
             await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
 
             return NoContent();
+        }
+
+        // POST: api/Characters/5/Enemys/1
+        [HttpPost("{locationId}/Locations/{enemyId}")]
+        public async Task AddEnemyToLocation(int locationId, int enemyId)
+        {
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
+            await _location.AddEnemyToLocation(locationId, enemyId);
+        }
+
+        // DELETE: api/Characters/5/Enemys/1
+        [HttpDelete("{locationId}/Locations/{enemyId}")]
+        public async Task DeleteEnemyFromInventory(int locationId, int enemyId)
+        {
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
+            await _location.RemoveEnemyFromLocation(locationId, enemyId);
+        }
+
+        // POST: api/Location/5/Enemies/1
+        [HttpPost("{locationId}/Enemies/{enemyId}")]
+        public async Task AddEnemyToLoot(int locationId, int enemyId)
+        {
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
+            await _location.AddEnemyToLocation(locationId, enemyId);
+        }
+
+        // DELETE: api/Locations/5/Enemies/1
+        [HttpDelete("{locationId}/Enemies/{enemyId}")]
+        public async Task DeleteEnemyFromLocation(int locationId, int enemyId)
+        {
+            await _log.CreateLog(HttpContext, User.FindFirst("UserName").Value);
+
+            await _location.RemoveEnemyFromLocation(locationId, enemyId);
         }
     }
 }

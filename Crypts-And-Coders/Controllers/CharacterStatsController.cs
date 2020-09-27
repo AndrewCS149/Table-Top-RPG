@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Crypts_And_Coders.Data;
-using Crypts_And_Coders.Models;
-using Crypts_And_Coders.Models.Interfaces;
+﻿using Crypts_And_Coders.Models;
 using Crypts_And_Coders.Models.DTOs;
-using static Crypts_And_Coders.Models.Services.UserServices;
+using Crypts_And_Coders.Models.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using static Crypts_And_Coders.Models.Services.UserServices;
 
 namespace Crypts_And_Coders.Controllers
 {
@@ -22,7 +17,6 @@ namespace Crypts_And_Coders.Controllers
         private readonly ICharacterStat _characterStat;
         private readonly ICharacter _character;
         private readonly ILog _log;
-
 
         public CharacterStatsController(ICharacterStat characterStat, ICharacter character, ILog log)
         {
@@ -90,7 +84,6 @@ namespace Crypts_And_Coders.Controllers
         [HttpPost("{charId}/Stats")]
         public async Task<ActionResult<CharacterStat>> PostCharacterStat(int charId, CharacterStatDTO characterStat)
         {
-
             if (!ValidateUser(User, _character, charId))
             {
                 return BadRequest("You do not have access to this account");
@@ -107,7 +100,6 @@ namespace Crypts_And_Coders.Controllers
         [HttpDelete("{charId}/Stats/{statId}")]
         public async Task<ActionResult<CharacterStat>> DeleteCharacterStat(int charId, int statId)
         {
-
             if (!ValidateUser(User, _character, charId))
             {
                 return BadRequest("You do not have access to this account");

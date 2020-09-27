@@ -1,9 +1,4 @@
-﻿using Crypts_And_Coders.Models.DTOs;
-using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Crypts_And_Coders.Models
 {
@@ -17,8 +12,6 @@ namespace Crypts_And_Coders.Models
         public SpeciesAndClass.Class Class { get; set; }
         public List<CharacterInventory> Inventory { get; set; }
         public List<CharacterStat> StatSheet { get; set; }
-        public List<EnemyLoot> EnemyLoot { get; set; }
         public string UserName { get; set; }
-
     }
 }

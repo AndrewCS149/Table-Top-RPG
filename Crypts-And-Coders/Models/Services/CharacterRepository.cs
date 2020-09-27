@@ -1,8 +1,6 @@
 ﻿using Crypts_And_Coders.Data;
 using Crypts_And_Coders.Models.DTOs;
 using Crypts_And_Coders.Models.Interfaces;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -61,13 +59,18 @@ namespace Crypts_And_Coders.Models.Services
         /// </summary>
         /// <param name="id">Id of character to be deleted</param>
         /// <returns>Task of completion for character delete</returns>
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             Character character = await _context.Character.FindAsync(id);
             if (character != null)
             {
                 _context.Entry(character).State = EntityState.Deleted;
                 await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -103,13 +106,12 @@ namespace Crypts_And_Coders.Models.Services
         /// Get a specific character in the database by ID synchronously (Needed for user validation)
         /// </summary>
         /// <param name="id">Id of character to search for</param>
-        /// <returns>Successful result of specified character</returns>
-        public string GetCharacterSync(int id)
+        /// <returns>String of character's name or string "null" if not found</returns>
+        public string GetCharacterUserNameSync(int id)
         {
             string result = _context.Character.Where(x => x.Id == id).Select(x => x.UserName != null ? x.UserName : "null").FirstOrDefault().ToString();
             return result;
         }
-
 
         /// <summary>
         /// Get a list of all characters in the database
@@ -121,10 +123,7 @@ namespace Crypts_And_Coders.Models.Services
             List<CharacterDTO> resultDTO = new List<CharacterDTO>();
             foreach (var item in result)
             {
-           
                 resultDTO.Add(await GetCharacter(item.Id));
-
-              
             }
             return resultDTO;
         }
@@ -149,7 +148,7 @@ namespace Crypts_And_Coders.Models.Services
                 WeaponId = characterDTO.WeaponId,
                 LocationId = characterDTO.LocationId,
                 UserName = characterDTO.UserName
-        };
+            };
 
             _context.Entry(character).State = EntityState.Modified;
             await _context.SaveChangesAsync();
@@ -209,8 +208,8 @@ namespace Crypts_And_Coders.Models.Services
                 resultDTO.Add(new InventoryDTO()
                 {
                     CharacterId = item.CharacterId,
-                    Item = new ItemDTO() 
-                    { 
+                    Item = new ItemDTO()
+                    {
                         Name = item.Item.Name,
                         Value = item.Item.Value,
                         Id = item.Item.Id

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Crypts_And_Coders.Models
+﻿namespace Crypts_And_Coders.Models
 {
     public class EnemyInLocation
     {
@@ -12,6 +7,5 @@ namespace Crypts_And_Coders.Models
 
         public Enemy Enemy { get; set; }
         public Location Location { get; set; }
-
     }
 }
